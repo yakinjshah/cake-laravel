@@ -52,7 +52,7 @@ class ProductController extends Controller
                     'name'=>'required',
                     'price'=>'required',
                     'sku'=>'required|unique:products,sku',
-                    // 'image'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
+                    'image'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
                     'image_gallary[]'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
                 ]);
                 if($validator->fails()){
@@ -70,12 +70,12 @@ class ProductController extends Controller
                 $product->total_ratting=$request->total_ratting;
 
 
-                // if($request->file('image')){
-                //     $img=$request->file('image');
-                //     $img_name = time() . rand(1, 100) . '.' . $img->extension();
-                //     $img->move(public_path('uploads/product_img'), $img_name);
-                //     $product->image=$img_name;
-                // }
+                if($request->file('image')){
+                    $img=$request->file('image');
+                    $img_name = time() . rand(1, 100) . '.' . $img->extension();
+                    $img->move(public_path('uploads/product_img'), $img_name);
+                    $product->image=$img_name;
+                }
 
                 $product->save();
                 if (!empty($product->id) && $request->hasfile('image_gallary')) {
@@ -161,7 +161,7 @@ class ProductController extends Controller
                 'name'=>'required',
                 'price'=>'required',
                 'sku'=>'required|unique:products,sku,'.$id,
-               // 'image'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
+               'image'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
                 'image_gallary[]'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
             ]);
             if($validator->fails()){
@@ -184,13 +184,13 @@ class ProductController extends Controller
             $product->total_ratting=$request->total_ratting;
 
 
-            // if($request->file('image')){
-            //     $img=$request->file('image');
-            //     $img_name = time() . rand(1, 100) . '.' . $img->extension();
-            //     $img->move(public_path('uploads/product_img'), $img_name);
-            //     $product->image=$img_name;
+            if($request->file('image')){
+                $img=$request->file('image');
+                $img_name = time() . rand(1, 100) . '.' . $img->extension();
+                $img->move(public_path('uploads/product_img'), $img_name);
+                $product->image=$img_name;
 
-            // }
+            }
 
             if (!empty($id) && $request->hasfile('image_gallary')) {
                 foreach ($request->file('image_gallary') as $file) {
