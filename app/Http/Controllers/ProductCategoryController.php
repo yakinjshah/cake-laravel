@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return ProductCategory::all();
     }
 
     /**
