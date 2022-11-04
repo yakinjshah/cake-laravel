@@ -36,7 +36,7 @@ class ProductCategoryController extends Controller
      */
     public function store(StoreProductCategoryRequest $request)
     {
-        //
+        return ProductCategory::create($request->validated());
     }
 
     /**
@@ -70,7 +70,7 @@ class ProductCategoryController extends Controller
      */
     public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
     {
-        //
+        
     }
 
     /**
@@ -79,8 +79,10 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductCategory $productCategory)
-    {
-        //
+    public function destroy(ProductCategory $productCategory, $id)
+    {   
+        $productCategory = ProductCategory::findOrFail($id);
+        $productCategory->delete();
+        return $productCategory;
     }
 }

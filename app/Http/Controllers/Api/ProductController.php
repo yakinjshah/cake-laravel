@@ -161,7 +161,7 @@ class ProductController extends Controller
                 'name'=>'required',
                 'price'=>'required',
                 'sku'=>'required|unique:products,sku,'.$id,
-               'image'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
+                'image'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
                 'image_gallary[]'=>'nullable|max:1024|mimes:jpeg,jpg,png,gif',
             ]);
             if($validator->fails()){
